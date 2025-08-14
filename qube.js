@@ -49,7 +49,10 @@ let cubeTemplates
             }
         }
         );
-        cubeTemplates=[glb.scene.children[2],glb.scene.children[3],glb.scene.children[4]]
+        cubeTemplates=[glb.scene.getObjectByName('Cube001'),
+                       glb.scene.getObjectByName('Cube002'),
+                       glb.scene.getObjectByName('Cube003')]
+        
         let m = cubeTemplates[cubeParams.style];
         let box = m;
         box.geometry.scale(.999,.999,.999)
@@ -76,7 +79,7 @@ let keys=Object.keys(mats)
 		gui.add(mat,'envMapIntensity',0,10).onChange(v=>curMat&&(curMat.envMapIntensity=v))
 		gui.add(mat,'metalness',0,1).onChange(v=>curMat&&(curMat.metalness=v))
         gui.add(mat,'roughness',0,1).onChange(v=>curMat&&(curMat.roughness=v))
-        gui.add(cubeParams,'style',0,cubeTemplates.length).onChange(val=>{
+        gui.add(cubeParams,'style',0,cubeTemplates.length-1,1).onChange(val=>{
             let ct=cubeTemplates[parseInt(val)%cubeTemplates.length];
             qube.children.forEach(e=>{
                 e.geometry = ct.geometry;
